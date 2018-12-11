@@ -25,10 +25,10 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          欢迎来到 React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit App.js
+          编辑 App.js 开始你的编程之旅
         </Text>
         <Text style={styles.instructions}>
           {instructions}

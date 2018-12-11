@@ -8,6 +8,8 @@
 
 如果 `react-native run-ios` 报错找不出原因，建议在 `XCode` 里跑，比较好找错误。
 
+很长一段时间没使用，运行出现各种错误，可以尝试把 `package-lock.json` 删除，然后重新安装依赖。
+
 ## XCode 10 出现的问题
 
 - [config.h file not found and :CFBundleIdentifier does not exist. ERROR](https://stackoverflow.com/questions/53454210/config-h-file-not-found-and-cfbundleidentifier-does-not-exist-error)

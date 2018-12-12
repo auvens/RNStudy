@@ -1,4 +1,4 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+import { AppRegistry } from 'react-native'
+import App from './src/pages/SwitchNavigator'
 
-AppRegistry.registerComponent('RNStudy', () => App);
+AppRegistry.registerComponent('RNStudy', () => App)

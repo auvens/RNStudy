@@ -1,22 +1,58 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, Image } from 'react-native'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
+
+class LogoTitle extends React.Component {
+  render() {
+    return (
+      <Image
+        source={require('./src/images/logo.png')}
+        style={{ width: 30, height: 30 }}
+        resizeMode="contain"
+      />
+    )
+  }
+}
+
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-    headerStyle: {
-      backgroundColor: '#f4511e'
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: '首页',
+      headerTitle: <LogoTitle />,
+      headerRight: (
+        <Button
+          onPress={navigation.getParam('increaseCount')}
+          title="+1"
+          color="#fff"
+        />
+      ),
+      headerLeft: (
+        <Button
+          onPress={() => navigation.navigate('MyModal')}
+          title="Info"
+          color="#fff"
+        />
+      )
     }
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ increaseCount: this._increaseCount })
+  }
+
+  state = {
+    count: 0
+  }
+
+  _increaseCount = () => {
+    this.setState({ count: this.state.count + 1 })
   }
 
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
+        <Text>{this.state.count}</Text>
         <Button
           title="Go to Details"
           onPress={() => {
@@ -83,7 +119,22 @@ class DetailsScreen extends React.Component {
     )
   }
 }
-const AppNavigator = createStackNavigator(
+
+class ModalScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+        <Button
+          onPress={() => this.props.navigation.goBack()}
+          title="Dismiss"
+        />
+      </View>
+    )
+  }
+}
+
+const MainStack = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen
@@ -102,7 +153,22 @@ const AppNavigator = createStackNavigator(
   }
 )
 
-const AppContainer = createAppContainer(AppNavigator)
+const RootStack = createStackNavigator(
+  {
+    Main: {
+      screen: MainStack
+    },
+    MyModal: {
+      screen: ModalScreen
+    }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none'
+  }
+)
+
+const AppContainer = createAppContainer(RootStack)
 
 export default class App extends React.Component {
   render() {

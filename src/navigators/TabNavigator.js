@@ -17,9 +17,9 @@ export default createBottomTabNavigator(
         const { routeName } = navigation.state
         let source
         if (routeName === 'Component') {
-          source = require('../images/icon_component.png')
+          source = focused ? require('../images/icon_component_HL.png') : require('../images/icon_component.png')
         } else if (routeName === 'API') {
-          source = require('../images/icon_API.png')
+          source = focused ? require('../images/icon_API_HL.png') : require('../images/icon_API.png')
         }
 
         return (

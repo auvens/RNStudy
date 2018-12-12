@@ -12,6 +12,8 @@ export default class AuthLoading extends React.Component {
     const firstUse = await AsyncStorage.getItem('firstUse')
 
     console.log('执行这里')
+    this.props.navigation.navigate('App')
+    return
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
